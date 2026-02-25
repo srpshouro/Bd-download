@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Legends | Premium MLBB Tournament Platform</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #00f3ff;
+            --secondary: #bc13fe;
+            --bg-dark: #07070a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --glow-primary: 0 0 20px rgba(0, 243, 255, 0.5);
+            --glow-secondary: 0 0 20px rgba(188, 19, 254, 0.5);
+        }
+
+        /* Reset & Base Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        .glow-blob {
+            position: absolute;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: floatBlob 20s infinite alternate linear;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--secondary);
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, 50px) scale(1.2); }
+            100% { transform: translate(-50px, 150px) scale(0.9); }
+        }
+
+        /* Layout & Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Glassmorphism Classes */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 1. Hero / App Card Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .app-card {
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 25%;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3px;
+            box-shadow: var(--glow-secondary);
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+            background: #111;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .app-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .app-tagline {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+
+        .app-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .meta-item {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        /* Download Button */
+        .download-btn {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            outline: none;
+        }
+
+        .download-btn:hover {
+            box-shadow: var(--glow-primary);
+            text-shadow: 0 0 8px rgba(255,255,255,0.5);
+            transform: scale(1.02);
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(0,243,255,0.4), rgba(188,19,254,0.6));
+            z-index: 1;
+            transition: width 0s; /* Controlled by JS */
+        }
+
+        /* --- 2. Features Section --- */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- 3. Screenshots Section --- */
+        .screenshots-slider {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .screenshots-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .screenshot-frame {
+            min-width: 260px;
+            height: 520px;
+            border-radius: 30px;
+            border: 6px solid #1a1a24;
+            background: linear-gradient(180deg, #111, #222);
+            position: relative;
+            scroll-snap-align: center;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-frame:hover {
+            transform: scale(1.05);
+            border-color: var(--secondary);
+            box-shadow: var(--glow-secondary);
+        }
+
+        .screen-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .screenshot-frame:hover .screen-img {
+            opacity: 1;
+        }
+
+        /* Mockup Notch */
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #1a1a24;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 2;
+        }
+
+        /* --- 4. Installation Guide Section --- */
+        .install-guide {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-list {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .step-list::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .step-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            position: absolute;
+            left: -55px;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            color: var(--primary);
+            box-shadow: 0 0 10px rgba(0,243,255,0.3);
+            z-index: 2;
+        }
+
+        .step-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover .step-content {
+            border-color: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .step-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- 5. Footer --- */
+        footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 40px 0 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            margin-top: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .safe-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-title { font-size: 2rem; }
+            .section-title { font-size: 1.6rem; }
+            .app-card { padding: 30px 20px; }
+            .step-list { padding-left: 30px; }
+            .step-number { left: -45px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="glow-blob blob-1"></div>
+        <div class="glow-blob blob-2"></div>
+    </div>
+
+    <!-- Hidden Download Link -->
+    <a id="hidden-download-link" href="Bd Legends.apk" download style="display: none;"></a>
+
+    <!-- 1. Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="app-card glass reveal">
+                <div class="app-icon">
+                    <img src="https://i.ibb.co.com/cSMk4T72/Messenger-creation-4403357413239995.jpg" alt="BD Legends Icon">
+                </div>
+                <h1 class="app-title">BD Legends</h1>
+                <p class="app-tagline">Premium MLBB Tournament Platform</p>
+                
+                <div class="app-meta">
+                    <span class="meta-item"><i class="fas fa-code-branch"></i> v1.0.0</span>
+                    <span class="meta-item"><i class="fas fa-file-download"></i> 7 MB</span>
+                    <span class="meta-item"><i class="fab fa-android"></i> Android 8.0+</span>
+                </div>
+
+                <button id="download-btn" class="download-btn">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <span class="btn-text" id="btn-text">
+                        <i class="fas fa-download"></i> Download APK
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title reveal">Premium <span>Features</span></h2>
+            <div class="features-grid">
+                
+                <div class="feature-card glass reveal">
+                    <i class="fas fa-trophy feature-icon"></i>
+                    <h3>Real Tournaments</h3>
+                    <p>Compete in daily and weekly MLBB tournaments with automated brackets.</p>
+                </div>
+
+                <div class="feature-card glass reveal" style="transition-delay: 0.1s;">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3>Secure Login</h3>
+                    <p>Encrypted data protection and advanced anti-cheat monitoring systems.</p>
+                </div>
+
+                <div class="feature-card glass reveal" style="transition-delay: 0.2s;">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3>Live Match Updates</h3>
+                    <p>Real-time API synchronization for match results and leaderboard standings.</p>
+                </div>
+
+                <div class="feature-card glass reveal" style="transition-delay: 0.3s;">
+                    <i class="fas fa-rocket feature-icon"></i>
+                    <h3>Fast Performance</h3>
+                    <p>Optimized native Android code ensures zero lag during heavy usage.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Screenshots Section -->
+    <section id="preview">
+        <div class="container">
+            <h2 class="section-title reveal">App <span>Preview</span></h2>
+            <div class="screenshots-slider reveal">
+                
+                <!-- Mockup 1 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss1.png" alt="UI Preview 1" class="screen-img">
+                </div>
+
+                <!-- Mockup 2 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss2.png" alt="UI Preview 2" class="screen-img">
+                </div>
+
+                <!-- Mockup 3 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss3.png" alt="UI Preview 3" class="screen-img">
+                </div>
+
+                <!-- Mockup 4 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss4.png" alt="UI Preview 4" class="screen-img">
+                </div>
+
+                <!-- Mockup 5 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss5.png" alt="UI Preview 5" class="screen-img">
+                </div>
+
+                <!-- Mockup 6 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss6.png" alt="UI Preview 6" class="screen-img">
+                </div>
+
+                <!-- Mockup 7 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss7.png" alt="UI Preview 7" class="screen-img">
+                </div>
+
+                <!-- Mockup 8 -->
+                <div class="screenshot-frame">
+                    <div class="notch"></div>
+                    <img src="ss8.png" alt="UI Preview 8" class="screen-img">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Installation Guide Section -->
+    <section id="installation">
+        <div class="container">
+            <h2 class="section-title reveal">How To <span>Install</span></h2>
+            
+            <div class="install-guide">
+                <div class="step-list">
+                    
+                    <div class="step-item reveal">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Download APK</h4>
+                            <p>Click the download button above to get the latest bdlegends.apk file directly to your device.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item reveal">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Allow Unknown Sources</h4>
+                            <p>Go to your phone Settings > Security > and enable "Install from Unknown Sources".</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item reveal">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Install App</h4>
+                            <p>Locate the downloaded APK in your file manager and tap it to start the installation process.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item reveal">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Open and Play</h4>
+                            <p>Launch BD Legends, register or log in, and join your first esports tournament!</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Footer -->
+    <footer>
+        <div class="container reveal">
+            <div class="safe-label">
+                <i class="fas fa-shield-check"></i> 100% Safe & Secure Download
+            </div>
+            <div class="footer-logo">BD <span>Legends</span></div>
+            <p class="copyright">&copy; 2026 BD Legends Esports. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Scroll Reveal Animation via Intersection Observer
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Download Button Logic with Animation
+            const downloadBtn = document.getElementById('download-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const btnText = document.getElementById('btn-text');
+            const hiddenLink = document.getElementById('hidden-download-link');
+            let isDownloading = false;
+
+            downloadBtn.addEventListener('click', () => {
+                if (isDownloading) return;
+                isDownloading = true;
+
+                // Set Initial Downloading State
+                downloadBtn.style.pointerEvents = 'none';
+                btnText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+                
+                // Animate Progress Bar (simulated duration: 2.5 seconds)
+                progressBar.style.transition = 'width 2.5s ease-in-out';
+                progressBar.style.width = '100%';
+
+                // When progress finishes
+                setTimeout(() => {
+                    // Trigger Actual Download
+                    hiddenLink.click();
+
+                    // Success State
+                    btnText.innerHTML = '<i class="fas fa-check-circle"></i> Download Complete';
+                    progressBar.style.background = 'linear-gradient(90deg, #00ff88, #00c366)';
+
+                    // Reset Button after 3 seconds
+                    setTimeout(() => {
+                        isDownloading = false;
+                        downloadBtn.style.pointerEvents = 'auto';
+                        progressBar.style.transition = 'none';
+                        progressBar.style.width = '0%';
+                        progressBar.style.background = 'linear-gradient(90deg, rgba(0,243,255,0.4), rgba(188,19,254,0.6))';
+                        btnText.innerHTML = '<i class="fas fa-download"></i> Download APK';
+                    }, 3500);
+
+                }, 2500);
+            });
+
+        });
+    </script>
+</body>
+</html>
