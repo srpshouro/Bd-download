@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!-- ======================================================== -->
+<!-- BD Legends Official Professional Sitemap - Edition 2026 -->
+<!-- ======================================================== -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Main Application Landing Page -->
   <url>
     <loc>https://bdlegends-download.vercel.app/</loc>
     <lastmod>2026-01-01T00:00:00+00:00</lastmod>
     <changefreq>always</changefreq>
     <priority>1.00</priority>
+    
+    <!-- Mobile SEO -->
+    <mobile:mobile/>
+
+    <!-- Image SEO: Identifying the App Icon for Google Image Search -->
+    <image:image>
+      <image:loc>https://i.ibb.co.com/cSMk4T72/Messenger-creation-4403357413239995.jpg</image:loc>
+      <image:title>BD Legends App Download Official Logo</image:title>
+      <image:caption>Download BD Legends - The Best MLBB BD Tournament App in Bangladesh.</image:caption>
+      <image:geo_location>Bangladesh</image:geo_location>
+    </image:image>
   </url>
+
 </urlset>
