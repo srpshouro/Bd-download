@@ -1,30 +1,9 @@
-# =========================================================
-# Robots.txt for BD Legends (2026 Latest)
-# URL: https://bdlegends-download.vercel.app/
-# =========================================================
-
 User-agent: *
 Allow: /
 Allow: /index.html
 Allow: /sitemap.xml
 
-# Indexing Priority for Search Engines
 User-agent: Googlebot
 Allow: /
 
-User-agent: Bingbot
-Allow: /
-
-# Prevent unnecessary bot crawling for performance
-User-agent: MJ12bot
-Disallow: /
-User-agent: AhrefsBot
-Disallow: /
-User-agent: SemrushBot
-Disallow: /
-
-# Link to the latest Sitemap
 Sitemap: https://bdlegends-download.vercel.app/sitemap.xml
-
-# Status: Fully Optimized for 2026 Indexing
-# End of Robots.txt
