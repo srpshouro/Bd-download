@@ -20,7 +20,12 @@
     <meta name="geo.region" content="BD">
     <link rel="canonical" href="https://bdlegends-download.vercel.app/">
 
-    <!-- OG Tags -->
+    <!-- PWA & Quick Indexing Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#00f3ff">
+    <link rel="apple-touch-icon" href="https://i.ibb.co.com/cSMk4T72/Messenger-creation-4403357413239995.jpg">
+
+    <!-- Open Graph (OG) Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bdlegends-download.vercel.app/">
     <meta property="og:title" content="BD Legends | MLBB BD Tournament App Official Download">
@@ -40,7 +45,7 @@
       "description": "Premium MLBB BD Tournament App for Android gamers.",
       "softwareVersion": "1.0.0",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "2850" }
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "2980" }
     }
     </script>
 
@@ -79,7 +84,7 @@
         .glow-blob { position: fixed; filter: blur(120px); opacity: 0.3; border-radius: 50%; animation: pulseBlob 15s infinite alternate; z-index: -1; }
         .blob-1 { width: 500px; height: 500px; background: var(--primary); top: -150px; left: -150px; }
         .blob-2 { width: 600px; height: 600px; background: var(--secondary); bottom: -200px; right: -150px; animation-delay: -5s; }
-        @keyframes pulseBlob { 0% { transform: scale(1) opacity: 0.2; } 100% { transform: scale(1.3) opacity: 0.4; } }
+        @keyframes pulseBlob { 0% { transform: scale(1); opacity: 0.2; } 100% { transform: scale(1.3); opacity: 0.4; } }
 
         /* Animations */
         .reveal { opacity: 0; transform: translateY(60px) scale(0.95); filter: blur(8px); transition: all 1s cubic-bezier(0.19, 1, 0.22, 1); }
@@ -170,7 +175,7 @@
 
     <a id="hidden-download-link" href="Bd Legends.apk" download style="display: none;"></a>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="app-card glass reveal">
@@ -187,7 +192,7 @@
         </div>
     </section>
 
-    <!-- Features -->
+    <!-- Features Section -->
     <section>
         <div class="container">
             <h2 class="section-title reveal">Premium <span>Features</span></h2>
@@ -211,7 +216,7 @@
         </div>
     </section>
 
-    <!-- Preview -->
+    <!-- Preview Section -->
     <section>
         <div class="container">
             <h2 class="section-title reveal">App <span>Preview</span></h2>
@@ -228,7 +233,7 @@
         </div>
     </section>
 
-    <!-- Installation -->
+    <!-- Installation Section -->
     <section>
         <div class="container">
             <h2 class="section-title reveal">How to <span>Install</span></h2>
@@ -269,6 +274,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Cinematic Scroll Reveal
             const revealElements = document.querySelectorAll('.reveal');
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -280,6 +286,7 @@
             }, { threshold: 0.1 });
             revealElements.forEach(el => revealObserver.observe(el));
 
+            // Download Simulation
             const downloadBtn = document.getElementById('download-btn');
             const progressBar = document.getElementById('progress-bar');
             downloadBtn.addEventListener('click', () => {
@@ -288,6 +295,12 @@
                 progressBar.style.width = '100%';
                 setTimeout(() => {
                     document.getElementById('hidden-download-link').click();
+                    downloadBtn.innerHTML = '<span style="position: relative; z-index: 2;"><i class="fas fa-check"></i> DOWNLOAD STARTED</span>';
+                    setTimeout(() => {
+                        progressBar.style.width = '0%';
+                        downloadBtn.style.pointerEvents = 'auto';
+                        downloadBtn.innerHTML = '<div class="progress-bar" id="progress-bar"></div><span style="position: relative; z-index: 2;"><i class="fas fa-download"></i> DOWNLOAD BD LEGENDS APP</span>';
+                    }, 5000);
                 }, 2500);
             });
         });
