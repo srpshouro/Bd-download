@@ -3,6 +3,7 @@ Allow: /
 Allow: /index.html
 Allow: /sitemap.xml
 
+# Indexing Priority
 User-agent: Googlebot
 Allow: /
 
