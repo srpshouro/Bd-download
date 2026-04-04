@@ -1,0 +1,16 @@
+{
+  "name": "BD Legends MLBB Tournament",
+  "short_name": "BD Legends",
+  "description": "Download BD Legends App. Join Everyday MLBB esports tournaments in Bangladesh.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030305",
+  "theme_color": "#00f3ff",
+  "icons": [
+    {
+      "src": "https://i.ibb.co.com/cSMk4T72/Messenger-creation-4403357413239995.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
